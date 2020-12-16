@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Animated, { Easing } from "react-native-reanimated";
+import { runTiming  } from "react-native-redash";
 
-export default function App() {
+import CircularProgress from './circularprogress';
+
+const { Clock } = Animated;
+
+export default () => {
+  const clock = new Clock();
+  const config = {
+    duration: 50 * 1000,
+    toValue: 1,
+    easing: Easing.linear,
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <CircularProgress progress={runTiming (clock, 0, config)} />
     </View>
   );
 }
+;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
